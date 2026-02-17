@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angry Sarge HQ: Operation Iceland Feasibility Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Energetic & Professional -->
+    <!-- Colors: #2563EB (Vibrant Blue), #F59E0B (Alert Amber), #10B981 (Success Green), #EF4444 (Threat Red) -->
+    
+    <!-- Application Structure Plan:
+         1. Header: Mission Title & Core Objective.
+         2. Executive Summary (KPIs): Quick look at costs, risks, and target location.
+         3. Technical Recon (Infrastructure): Visualizing storage limits and database load composition.
+         4. The Data Fortress (Sovereignty): Structural HTML diagram showing layers of privacy protection.
+         5. Legal Firewall (Threat Assessment): Radar chart comparing US Vulnerability vs. Icelandic Resilience.
+         6. Financial Logistics (ROI): Comparative cost analysis of hosting vs. de-platforming risk.
+    -->
+
+    <!-- Visualization & Content Choices:
+         - Cost/Risk Overview -> Goal: Inform -> Big Number Cards -> Simple bold text cards.
+         - Database Load -> Goal: Composition -> Donut Chart -> Chart.js.
+         - Storage Analysis -> Goal: Compare -> Bar Chart -> Chart.js.
+         - Legal Protection -> Goal: Compare Attributes -> Radar Chart -> Chart.js (Perfect for multi-axis defense scoring).
+         - Subpoena Protocol -> Goal: Process Flow -> Styled HTML/CSS Flowchart (NO SVG/Mermaid).
+         - Financial Risk -> Goal: Compare Values -> Stacked Bar Chart -> Chart.js.
+         - Justification: Chart.js handles the quantitative data efficiently without SVG. HTML/CSS replaces diagrams.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #F3F4F6; /* Cool Gray 100 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 4px solid #2563EB;
+        }
+        .flow-arrow::after {
+            content: '▼';
+            display: block;
+            text-align: center;
+            color: #9CA3AF;
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        @media (min-width: 768px) {
+            .flow-arrow::after {
+                content: '▶';
+                margin: 0 1rem;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white py-12 px-4 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider mb-4">Operation: Iceland</h1>
+            <h2 class="text-xl md:text-2xl font-light text-blue-100">Feasibility & Legal Resilience Report for Angry Sarge HQ</h2>
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <span class="bg-blue-800 bg-opacity-50 px-4 py-2 rounded-full border border-blue-400 text-sm font-bold uppercase tracking-wide">Target: OrangeWebsite</span>
+                <span class="bg-blue-800 bg-opacity-50 px-4 py-2 rounded-full border border-blue-400 text-sm font-bold uppercase tracking-wide">Jurisdiction: Iceland (IS)</span>
+                <span class="bg-amber-500 text-black px-4 py-2 rounded-full border border-amber-400 text-sm font-bold uppercase tracking-wide">Status: Analysis Phase</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 gap-12">
+
+        <!-- SECTION 1: EXECUTIVE BRIEF -->
+        <section class="bg-white rounded-xl shadow-md p-6 md:p-8">
+            <div class="border-l-8 border-amber-500 pl-6 mb-6">
+                <h3 class="text-2xl font-bold text-gray-900">Mission Objective</h3>
+                <p class="text-lg text-gray-600 mt-2">To conduct a comprehensive feasibility study for migrating "Angry Sarge HQ"—a 2A-focused digital brand—to a sovereign Icelandic hosting environment. The primary goal is to establish a <strong>Legal Firewall</strong> against US state-level lawfare and ensure <strong>Data Sovereignty</strong>.</p>
+            </div>
+
+            <p class="mb-6 text-gray-600">The following key performance indicators highlight the immediate financial and operational parameters of the proposed "Emerald Plan" migration.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-6 rounded-lg text-center border border-blue-100">
+                    <div class="text-4xl font-black text-blue-600 mb-2">$435</div>
+                    <div class="text-sm font-bold uppercase text-gray-500 tracking-wide">Est. Annual Overhead</div>
+                    <p class="text-xs text-gray-400 mt-1">Hosting + SSL</p>
+                </div>
+                <div class="bg-red-50 p-6 rounded-lg text-center border border-red-100">
+                    <div class="text-4xl font-black text-red-600 mb-2">High</div>
+                    <div class="text-sm font-bold uppercase text-gray-500 tracking-wide">US Liability Risk</div>
+                    <p class="text-xs text-gray-400 mt-1">CA SB 1327 / NY SHIELD</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-lg text-center border border-green-100">
+                    <div class="text-4xl font-black text-green-600 mb-2">Strong</div>
+                    <div class="text-sm font-bold uppercase text-gray-500 tracking-wide">Icelandic Shield</div>
+                    <p class="text-xs text-gray-400 mt-1">2026 Persónuvernd Protocol</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: TECHNICAL RECON -->
+        <section>
+            <div class="flex items-center mb-6">
+                <span class="text-3xl mr-3">🖥️</span>
+                <h3 class="text-3xl font-bold text-gray-900">I. Technical Infrastructure</h3>
+            </div>
+            <p class="mb-8 text-gray-600 max-w-4xl">Evaluating the <strong>OrangeWebsite Emerald Plan</strong> for hardware capabilities. Key challenges include high concurrent database loads from community plugins and limited onboard storage for high-definition media.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Database Load Chart -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-blue-500">
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Database Load Distribution</h4>
+                    <p class="text-sm text-gray-500 mb-4">Estimated query intensity by plugin component.</p>
+                    <div class="chart-container">
+                        <canvas id="dbLoadChart"></canvas>
+                    </div>
+                    <div class="mt-4 bg-blue-50 p-3 rounded text-sm text-blue-800">
+                        <strong>Intel:</strong> BuddyPress represents the highest load risk. LiteSpeed Cache + Redis is critical to prevent timeouts.
+                    </div>
+                </div>
+
+                <!-- Storage Capacity Chart -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-amber-500">
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Media Storage Feasibility</h4>
+                    <p class="text-sm text-gray-500 mb-4">Emerald Plan Cap (30GB) vs. Content Needs.</p>
+                    <div class="chart-container">
+                        <canvas id="storageChart"></canvas>
+                    </div>
+                    <div class="mt-4 bg-amber-50 p-3 rounded text-sm text-amber-800">
+                        <strong>Intel:</strong> 30GB is insufficient for 2A video hosting. An external S3 bucket (e.g., Wasabi) is <strong>mandatory</strong>.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THE DATA FORTRESS -->
+        <section class="bg-gray-800 text-white rounded-xl shadow-xl overflow-hidden">
+            <div class="p-8 md:p-12">
+                <div class="flex items-center mb-6">
+                    <span class="text-3xl mr-3">🏰</span>
+                    <h3 class="text-3xl font-bold">II. The Data Fortress</h3>
+                </div>
+                <p class="mb-10 text-gray-300 max-w-3xl">Leveraging the <strong>2026 Icelandic Data Protection Authority (Persónuvernd)</strong> strategy. The architecture isolates commercial data from sensitive "Health" and community data, creating a zero-log environment.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <!-- Layer 1 -->
+                    <div class="bg-gray-700 p-6 rounded-lg hover:bg-gray-600 transition duration-300">
+                        <div class="text-4xl mb-4">🏥</div>
+                        <h4 class="text-xl font-bold text-blue-300 mb-2">Health Data Pillar</h4>
+                        <p class="text-sm text-gray-300">Classifies community medical discussions as "Sensitive Personal Data," triggering maximum legal protection under Icelandic Law.</p>
+                    </div>
+                    <!-- Layer 2 -->
+                    <div class="bg-gray-700 p-6 rounded-lg hover:bg-gray-600 transition duration-300">
+                        <div class="text-4xl mb-4">👻</div>
+                        <h4 class="text-xl font-bold text-green-300 mb-2">Zero-Log Protocol</h4>
+                        <p class="text-sm text-gray-300">Server configuration disables IP logging. Even if seized, the server yields no user location or identity metadata.</p>
+                    </div>
+                    <!-- Layer 3 -->
+                    <div class="bg-gray-700 p-6 rounded-lg hover:bg-gray-600 transition duration-300">
+                        <div class="text-4xl mb-4">🛡️</div>
+                        <h4 class="text-xl font-bold text-amber-300 mb-2">Subdomain Isolation</h4>
+                        <p class="text-sm text-gray-300">Strict separation of <em>Shop.AngrySarge</em> (Taxable/Public) from <em>Clan.AngrySarge</em> (Private/Protected).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: LEGAL FIREWALL -->
+        <section>
+            <div class="flex items-center mb-6">
+                <span class="text-3xl mr-3">⚖️</span>
+                <h3 class="text-3xl font-bold text-gray-900">III. Legal Firewall & Lawfare Defense</h3>
+            </div>
+            <p class="mb-8 text-gray-600 max-w-4xl">Analyzing the "Jurisdictional Shield" against 2026 US legislation. The chart below visualizes the <strong>Protective Gap</strong> between US-based hosting and the Icelandic alternative regarding specific threats like CA SB 1327.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Radar Chart: Resilience -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Jurisdictional Resilience Matrix</h4>
+                    <p class="text-sm text-gray-500 mb-4">Comparing Defense Scores (0-100) across key vectors.</p>
+                    <div class="chart-container">
+                        <canvas id="legalRadarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Threat Details -->
+                <div class="space-y-4">
+                    <div class="bg-white p-5 rounded-lg shadow border-l-4 border-red-500">
+                        <h5 class="font-bold text-gray-900">The Threat: CA AB 2571</h5>
+                        <p class="text-xs text-gray-500 mb-2">"Marketing to Minors" ($25k fines)</p>
+                        <p class="text-sm text-gray-700"><strong>Icelandic Defense:</strong> Lack of "Dual Criminality." Marketing legal firearms is not a crime in Iceland; US civil fines are unenforceable.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow border-l-4 border-red-500">
+                        <h5 class="font-bold text-gray-900">The Threat: Private Action</h5>
+                        <p class="text-xs text-gray-500 mb-2">"Bounty Hunter" Lawsuits</p>
+                        <p class="text-sm text-gray-700"><strong>Icelandic Defense:</strong> Iceland does not recognize foreign "Private Right of Action" statutes. Suits must originate in Reykjavik courts.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow border-l-4 border-amber-500">
+                        <h5 class="font-bold text-gray-900">The Threat: Subpoenas</h5>
+                        <p class="text-xs text-gray-500 mb-2">Data Discovery Requests</p>
+                        <p class="text-sm text-gray-700"><strong>Icelandic Defense:</strong> Requires a domestic court order. "Fishing expeditions" for user data are summarily rejected.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subpoena Protocol Flow -->
+            <div class="mt-8 bg-white rounded-xl shadow-md p-6">
+                <h4 class="text-lg font-bold text-gray-800 mb-6">Subpoena Defense Protocol</h4>
+                <div class="flex flex-col md:flex-row justify-between items-center text-center">
+                    <div class="flex-1 p-4 bg-red-50 rounded border border-red-200">
+                        <div class="font-bold text-red-800">1. US Civil Subpoena</div>
+                        <div class="text-xs text-red-600">Origin: California Court</div>
+                    </div>
+                    <div class="flow-arrow text-2xl text-gray-400"></div>
+                    <div class="flex-1 p-4 bg-gray-50 rounded border border-gray-200">
+                        <div class="font-bold text-gray-800">2. Icelandic Host</div>
+                        <div class="text-xs text-gray-500">Review: OrangeWebsite Legal</div>
+                    </div>
+                    <div class="flow-arrow text-2xl text-gray-400"></div>
+                    <div class="flex-1 p-4 bg-amber-50 rounded border border-amber-200">
+                        <div class="font-bold text-amber-800">3. Reject & Refer</div>
+                        <div class="text-xs text-amber-600">Result: "Not Valid in IS"</div>
+                    </div>
+                    <div class="flow-arrow text-2xl text-gray-400"></div>
+                    <div class="flex-1 p-4 bg-green-50 rounded border border-green-200 shadow-md transform scale-105">
+                        <div class="font-bold text-green-800">4. Data Secure</div>
+                        <div class="text-xs text-green-600">No Disclosure Made</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: FINANCIAL FEASIBILITY -->
+        <section class="mb-12">
+             <div class="flex items-center mb-6">
+                <span class="text-3xl mr-3">💰</span>
+                <h3 class="text-3xl font-bold text-gray-900">IV. Financial Feasibility</h3>
+            </div>
+            <p class="mb-8 text-gray-600">ROI Analysis: Contrasting the tangible annual overhead of sovereign hosting against the existential "Risk Cost" of staying on domestic platforms subject to de-platforming.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Stacked Bar Chart: Total Cost of Ownership -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Risk-Adjusted Cost Comparison</h4>
+                    <p class="text-sm text-gray-500 mb-4">Hard Costs (Hosting) vs. Soft Costs (Legal/Risk).</p>
+                    <div class="chart-container">
+                        <canvas id="financialChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Financial Breakdown -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-xl shadow p-6 border-l-4 border-green-500">
+                        <h4 class="text-lg font-bold text-gray-800">Investment: Sovereign Hosting</h4>
+                        <ul class="mt-4 space-y-3">
+                            <li class="flex justify-between border-b border-gray-100 pb-2">
+                                <span class="text-gray-600">Emerald Plan (Annual)</span>
+                                <span class="font-bold text-gray-900">$400.00</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-100 pb-2">
+                                <span class="text-gray-600">Sectigo PositiveSSL</span>
+                                <span class="font-bold text-gray-900">$35.00</span>
+                            </li>
+                            <li class="flex justify-between pt-2">
+                                <span class="font-bold text-gray-800">Total "Censorship Insurance"</span>
+                                <span class="font-bold text-green-600">$435.00 / year</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow p-6 border-l-4 border-red-500">
+                        <h4 class="text-lg font-bold text-gray-800">Risk: Domestic Hosting</h4>
+                        <ul class="mt-4 space-y-3">
+                            <li class="flex justify-between border-b border-gray-100 pb-2">
+                                <span class="text-gray-600">Standard Hosting</span>
+                                <span class="font-bold text-gray-900">$150.00</span>
+                            </li>
+                             <li class="flex justify-between border-b border-gray-100 pb-2">
+                                <span class="text-gray-600">Potential Legal Defense</span>
+                                <span class="font-bold text-red-600">$25,000+</span>
+                            </li>
+                            <li class="flex justify-between pt-2">
+                                <span class="font-bold text-gray-800">Platform Risk</span>
+                                <span class="font-bold text-red-600">100% Asset Loss</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="font-mono text-sm">CONFIDENTIAL BRIEF // ANGRY SARGE HQ</p>
+            <p class="text-xs mt-2">Generated for Strategic Review. Based on 2026 Projections.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js Default Config for Responsiveness
+        Chart.defaults.maintainAspectRatio = false;
+        Chart.defaults.font.family = "'Roboto', sans-serif";
+
+        // 1. Database Load Chart (Donut)
+        const ctxDb = document.getElementById('dbLoadChart').getContext('2d');
+        const dbLoadChart = new Chart(ctxDb, {
+            type: 'doughnut',
+            data: {
+                labels: ['BuddyPress (Community)', 'WooCommerce (Store)', 'bbPress (Forums)', 'Core/Other'],
+                datasets: [{
+                    data: [55, 15, 20, 10],
+                    backgroundColor: [
+                        '#2563EB', // Blue
+                        '#10B981', // Green
+                        '#F59E0B', // Amber
+                        '#9CA3AF'  // Gray
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) return label.join(' ');
+                                return label;
+                            },
+                            label: function(context) {
+                                return ` ${context.label}: ${context.raw}% Load`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 2. Storage Chart (Bar)
+        const ctxStorage = document.getElementById('storageChart').getContext('2d');
+        const storageChart = new Chart(ctxStorage, {
+            type: 'bar',
+            data: {
+                labels: ['Plan Limit (30GB)', 'Current Site', 'Video Archive (HD)', 'Projected 2026'],
+                datasets: [{
+                    label: 'Storage Required (GB)',
+                    data: [30, 12, 150, 200],
+                    backgroundColor: [
+                        '#F59E0B', // Limit
+                        '#10B981', // Current
+                        '#EF4444', // Video (Over limit)
+                        '#3B82F6'  // Future
+                    ],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) return label.join(' ');
+                                return label;
+                            }
+                        }
+                    },
+                    annotation: { // Note: Annotation plugin not loaded, using title instead
+                        title: { display: true, text: 'The 30GB Hard Cap is the Bottleneck' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Gigabytes (GB)' }
+                    }
+                }
+            }
+        });
+
+        // 3. Legal Radar Chart
+        const ctxRadar = document.getElementById('legalRadarChart').getContext('2d');
+        const legalRadarChart = new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: [
+                    ['DMCA', 'Resilience'], 
+                    ['Subpoena', 'Resistance'], 
+                    ['Privacy', 'Protection'], 
+                    ['Freedom of', 'Expression'], 
+                    ['Civil Liability', 'Shield']
+                ],
+                datasets: [{
+                    label: 'US Hosting (Risk)',
+                    data: [20, 30, 40, 50, 10],
+                    fill: true,
+                    backgroundColor: 'rgba(239, 68, 68, 0.2)', // Red
+                    borderColor: '#EF4444',
+                    pointBackgroundColor: '#EF4444'
+                }, {
+                    label: 'Icelandic Hosting (Shield)',
+                    data: [90, 85, 95, 90, 95],
+                    fill: true,
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)', // Green
+                    borderColor: '#10B981',
+                    pointBackgroundColor: '#10B981'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#E5E7EB' },
+                        grid: { color: '#E5E7EB' },
+                        pointLabels: {
+                            font: { size: 12, weight: 'bold' }
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) return label.join(' ');
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 4. Financial Stacked Bar
+        const ctxFinancial = document.getElementById('financialChart').getContext('2d');
+        const financialChart = new Chart(ctxFinancial, {
+            type: 'bar',
+            data: {
+                labels: ['Domestic Hosting', 'Icelandic Sovereign'],
+                datasets: [{
+                    label: 'Hard Costs (Hosting/SSL)',
+                    data: [150, 435],
+                    backgroundColor: '#3B82F6',
+                }, {
+                    label: 'Risk Cost (Legal/Fines)',
+                    data: [25000, 500], // Huge risk for US, minimal for IS
+                    backgroundColor: '#EF4444',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true },
+                    y: { 
+                        stacked: true,
+                        title: { display: true, text: 'Total Estimated Cost ($)' }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) return label.join(' ');
+                                return label;
+                            },
+                            footer: function(tooltipItems) {
+                                let total = 0;
+                                tooltipItems.forEach(function(tooltipItem) {
+                                    total += tooltipItem.raw;
+                                });
+                                return 'Total Impact: $' + total.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

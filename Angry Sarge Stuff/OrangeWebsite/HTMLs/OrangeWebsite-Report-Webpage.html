@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angry Sarge HQ: Strategic Migration Initiative</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Stone & Tactical Olive -->
+    <!-- The app uses a base of warm neutrals (Stone-50 to Stone-900) to maintain a professional, paper-like quality requested in the inspiration. 
+         Accents are a muted Tactical Green (Olive) and Alert Amber to signify the "Sarge" branding without being aggressive, keeping the "High-level professional" tone. -->
+
+    <!-- Application Structure Plan: 
+         The app is designed as a "Mission Control" Dashboard. 
+         Rationale: The source text is a strategic directive/feasibility study plan. A dashboard format best suits a "Strategist" reviewing these pillars.
+         Structure:
+         1. Executive Briefing: High-level overview and a "Resilience Radar" visualizing the projected benefits of the move.
+         2. Infrastructure (Tech): A grid layout analyzing the hardware/hosting specs.
+         3. Legal Firewall: An interactive "Threat vs. Shield" analysis tool to explore US risks against Icelandic protections.
+         4. Sovereignty & Data: A visual layering of the privacy protections (The "Fortress" concept).
+         5. Logistics (Financial): Cost-benefit analysis.
+         Key Interactions: Tabbed navigation for sections, interactive risk cards, dynamic charts comparing US vs. Iceland hosting scenarios. -->
+
+    <!-- Visualization & Content Choices:
+         1. Resilience Radar (Chart.js): Visualizes the hypothesis that Iceland offers superior protection across 5 axes (Privacy, Legal, Cost, Tech, Censorship).
+            - Goal: Compare. 
+            - Interaction: Toggle between "Current US Status" and "Projected Iceland Status".
+         2. Threat Matrix (HTML/JS): Interactive cards for specific US laws (SB 1327, etc.).
+            - Goal: Inform/Change.
+            - Interaction: Click to reveal the specific "Icelandic Defense" strategy.
+         3. Financial Risk Bar Chart (Chart.js): Compares tangible hosting costs vs. intangible risk costs.
+            - Goal: Inform/Persuade.
+         4. Data Fortress (HTML/CSS): A conceptual diagram using nested divs to show the layers of protection (Physical -> Network -> Legal).
+            - Goal: Organize.
+            - Note: NO SVG or Mermaid used. -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        /* Chart Container Utilities */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Constrain max width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 400px;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 280px;
+            }
+        }
+
+        /* Custom Scrollbar for inner content if needed */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f4; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a8a29e; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #78716c; 
+        }
+
+        .tab-active {
+            border-bottom: 3px solid #65a30d; /* Lime-600/Oliveish */
+            color: #3f6212; /* Lime-900 */
+            font-weight: 600;
+        }
+        .tab-inactive {
+            color: #78716c; /* Stone-500 */
+        }
+        .tab-inactive:hover {
+            color: #44403c; /* Stone-700 */
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3">
+                    <div class="h-8 w-8 bg-stone-800 rounded flex items-center justify-center text-white font-bold text-lg">AS</div>
+                    <div>
+                        <h1 class="text-xl font-bold text-stone-900 tracking-tight">Angry Sarge HQ</h1>
+                        <p class="text-xs text-stone-500 uppercase tracking-wider">Strategic Migration Initiative</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <span class="text-sm font-medium text-stone-500">Status: <span class="text-amber-600">Planning Phase</span></span>
+                    <span class="text-sm font-medium text-stone-500">Target: <span class="text-stone-900">Iceland (IS)</span></span>
+                </div>
+            </div>
+            
+            <!-- Navigation Tabs -->
+            <nav class="flex space-x-8 overflow-x-auto no-scrollbar" aria-label="Tabs">
+                <button onclick="navigateTo('executive')" id="tab-executive" class="tab-active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    Executive Briefing
+                </button>
+                <button onclick="navigateTo('tech')" id="tab-tech" class="tab-inactive whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent">
+                    I. Technical Core
+                </button>
+                <button onclick="navigateTo('sovereignty')" id="tab-sovereignty" class="tab-inactive whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent">
+                    II. Data Sovereignty
+                </button>
+                <button onclick="navigateTo('legal')" id="tab-legal" class="tab-inactive whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent">
+                    III. Legal Firewall
+                </button>
+                <button onclick="navigateTo('finance')" id="tab-finance" class="tab-inactive whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent">
+                    IV. Financials
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+        
+        <!-- SECTION: EXECUTIVE BRIEFING -->
+        <section id="view-executive" class="space-y-8 animate-fade-in">
+            <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-6 md:p-8">
+                <div class="max-w-3xl">
+                    <h2 class="text-2xl font-bold text-stone-900 mb-4">Mission Objective</h2>
+                    <p class="text-stone-600 leading-relaxed mb-6">
+                        This strategic dashboard outlines the feasibility study for migrating "Angry Sarge HQ" digital assets to a sovereign Icelandic hosting environment. 
+                        The primary goal is to establish a resilient, censorship-resistant infrastructure that leverages Iceland's unique "Data Protection Authority" (Persónuvernd) 
+                        and legal frameworks to shield the brand from US state-level regulatory targeting (Lawfare).
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-full border border-stone-300">Target Host: OrangeWebsite</span>
+                        <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-full border border-stone-300">Jurisdiction: Iceland</span>
+                        <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-full border border-stone-300">Key Risk: CA AB 2571</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Strategic Value Radar -->
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-bold text-stone-900">Projected Resilience Matrix</h3>
+                        <button onclick="toggleRadarData()" class="text-xs bg-stone-800 text-white px-3 py-1 rounded hover:bg-stone-700 transition">
+                            Compare: US vs Iceland
+                        </button>
+                    </div>
+                    <p class="text-sm text-stone-500 mb-4">
+                        Visualizing the strategic advantage of the Icelandic move across five key operational vectors.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center text-xs text-stone-400">
+                        Click "Compare" to simulate migration impact.
+                    </div>
+                </div>
+
+                <!-- Key Directives Summary -->
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-900 mb-4">Master Directives</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xs font-bold mt-0.5">1</div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-bold text-stone-900">Establish Technical Capacity</h4>
+                                    <p class="text-sm text-stone-600">Verify OrangeWebsite Emerald Plan handles high-concurrency DB loads (BuddyPress) and media storage needs.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xs font-bold mt-0.5">2</div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-bold text-stone-900">Erect Legal Firewall</h4>
+                                    <p class="text-sm text-stone-600">Confirm Icelandic immunity to US state-level civil suits (Bounty Hunting) and subpoena protocols.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xs font-bold mt-0.5">3</div>
+                                <div class="ml-3">
+                                    <h4 class="text-sm font-bold text-stone-900">Ensure Financial Viability</h4>
+                                    <p class="text-sm text-stone-600">Weigh higher hosting overhead against the existential cost of US de-platforming.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-stone-100">
+                        <div class="bg-stone-50 rounded p-4 border border-stone-200">
+                            <h4 class="text-xs font-bold text-stone-500 uppercase mb-2">Current Status</h4>
+                            <div class="w-full bg-stone-200 rounded-full h-2.5">
+                                <div class="bg-amber-600 h-2.5 rounded-full" style="width: 15%"></div>
+                            </div>
+                            <p class="text-right text-xs text-stone-500 mt-1">Research Phase Initiated</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TECHNICAL CORE -->
+        <section id="view-tech" class="hidden space-y-8 animate-fade-in">
+            <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-6">
+                <h2 class="text-2xl font-bold text-stone-900 mb-2">I. Core Technical Infrastructure</h2>
+                <p class="text-stone-600 mb-6">Analysis of the proposed hosting environment (OrangeWebsite Emerald Plan) against the specific high-load demands of the Angry Sarge HQ community platform.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Tech Card 1 -->
+                    <div class="p-6 bg-stone-50 rounded-xl border border-stone-200 card-hover">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-stone-900">Database Load</h3>
+                            <span class="text-2xl">💾</span>
+                        </div>
+                        <p class="text-sm text-stone-600 mb-4">
+                            <strong>Challenge:</strong> Concurrent query intensity from BuddyPress, bbPress, and Membership plugins.
+                        </p>
+                        <div class="bg-white p-3 rounded border border-stone-200 text-sm">
+                            <span class="font-semibold text-amber-700">Directive:</span> Assess capacity for high SQL throughput. WordPress on shared hosting often bottlenecks here.
+                        </div>
+                    </div>
+
+                    <!-- Tech Card 2 -->
+                    <div class="p-6 bg-stone-50 rounded-xl border border-stone-200 card-hover">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-stone-900">Latency & Speed</h3>
+                            <span class="text-2xl">⚡</span>
+                        </div>
+                        <p class="text-sm text-stone-600 mb-4">
+                            <strong>Challenge:</strong> Physical distance (Iceland -> US Users) causes latency.
+                        </p>
+                        <div class="bg-white p-3 rounded border border-stone-200 text-sm">
+                            <span class="font-semibold text-amber-700">Directive:</span> Evaluate LiteSpeed Enterprise + Redis Object Caching efficiency to mitigate transatlantic lag.
+                        </div>
+                    </div>
+
+                    <!-- Tech Card 3 -->
+                    <div class="p-6 bg-stone-50 rounded-xl border border-stone-200 card-hover">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-stone-900">Media Storage</h3>
+                            <span class="text-2xl">🎥</span>
+                        </div>
+                        <p class="text-sm text-stone-600 mb-4">
+                            <strong>Challenge:</strong> 30GB Cap vs. High-Definition 2A Video Content.
+                        </p>
+                        <div class="bg-white p-3 rounded border border-stone-200 text-sm">
+                            <span class="font-semibold text-amber-700">Directive:</span> Determine necessity of external S3 (Wasabi) vs internal storage. 30GB is likely insufficient for video host.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: DATA SOVEREIGNTY -->
+        <section id="view-sovereignty" class="hidden space-y-8 animate-fade-in">
+             <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-6 md:p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-stone-900 mb-4">II. The Privacy Fortress</h2>
+                        <p class="text-stone-600 mb-6">
+                            Leveraging the 2026 Icelandic Data Protection Authority (Persónuvernd) strategy. 
+                            The architecture must isolate commercial data from sensitive community interactions.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-lg bg-stone-100 flex items-center justify-center text-xl border border-stone-200">🏥</div>
+                                <div>
+                                    <h4 class="font-bold text-stone-900">Health Data Pillar</h4>
+                                    <p class="text-sm text-stone-600">Utilization of "Health Information Security" protocols to protect sensitive member data (e.g., medical subdomains).</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-lg bg-stone-100 flex items-center justify-center text-xl border border-stone-200">👻</div>
+                                <div>
+                                    <h4 class="font-bold text-stone-900">Zero-Log Policy</h4>
+                                    <p class="text-sm text-stone-600">Implementation of a strict "No-IP-Logging" environment to ensure maximum anonymity for clan members.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-12 h-12 rounded-lg bg-stone-100 flex items-center justify-center text-xl border border-stone-200">🛡️</div>
+                                <div>
+                                    <h4 class="font-bold text-stone-900">Subdomain Isolation</h4>
+                                    <p class="text-sm text-stone-600">Silo strategy: Commercial store data (taxable/auditable) kept separate from private community health/chat data.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CSS Diagram: The Fortress Layers -->
+                    <div class="flex justify-center py-8 bg-stone-50 rounded-xl border border-stone-200">
+                        <div class="relative w-64 h-64 flex items-center justify-center">
+                            <!-- Outer Layer -->
+                            <div class="absolute inset-0 border-2 border-dashed border-stone-300 rounded-full animate-spin-slow"></div>
+                            <div class="absolute -top-6 text-xs font-bold text-stone-400 bg-stone-50 px-2">Jurisdiction (Iceland)</div>
+                            
+                            <!-- Middle Layer -->
+                            <div class="absolute w-48 h-48 border-2 border-stone-400 rounded-full flex items-center justify-center bg-white shadow-sm">
+                                <div class="absolute -top-3 text-xs font-bold text-stone-500 bg-white px-2">Store (Public)</div>
+                            </div>
+                            
+                            <!-- Core Layer -->
+                            <div class="absolute w-24 h-24 bg-stone-800 rounded-full flex items-center justify-center shadow-lg z-10">
+                                <span class="text-white text-xs font-bold text-center leading-tight">Private<br>Community<br>(Zero-Log)</span>
+                            </div>
+                            
+                            <!-- Connection Lines -->
+                            <div class="absolute w-full h-0.5 bg-transparent border-t border-dotted border-stone-300 transform rotate-45"></div>
+                            <div class="absolute w-full h-0.5 bg-transparent border-t border-dotted border-stone-300 transform -rotate-45"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: LEGAL FIREWALL -->
+        <section id="view-legal" class="hidden space-y-8 animate-fade-in">
+            <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-6">
+                <h2 class="text-2xl font-bold text-stone-900 mb-2">III. Legal Firewall & Lawfare Defense</h2>
+                <p class="text-stone-600 mb-8">Analysis of the "Jurisdictional Shield" against 2026 US State-Level Legislation. Click on a US Threat to see the Icelandic Defense.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Threat Selector -->
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-bold text-stone-400 uppercase tracking-wide">US State Threats (2026 Focus)</h3>
+                        
+                        <div onclick="showDefense('ab2571')" class="cursor-pointer p-4 border border-stone-200 rounded-lg hover:border-amber-500 hover:bg-stone-50 transition group bg-white">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-stone-800 group-hover:text-amber-700">CA AB 2571 (Marketing)</span>
+                                <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">High Risk</span>
+                            </div>
+                            <p class="text-xs text-stone-500 mt-2">Fines of $25k/occurrence for content "attractive to minors".</p>
+                        </div>
+
+                        <div onclick="showDefense('ab1594')" class="cursor-pointer p-4 border border-stone-200 rounded-lg hover:border-amber-500 hover:bg-stone-50 transition group bg-white">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-stone-800 group-hover:text-amber-700">AB 1594 (Private Action)</span>
+                                <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">High Risk</span>
+                            </div>
+                            <p class="text-xs text-stone-500 mt-2">"Private Right of Action" allowing civil suits against industry members.</p>
+                        </div>
+
+                        <div onclick="showDefense('subpoena')" class="cursor-pointer p-4 border border-stone-200 rounded-lg hover:border-amber-500 hover:bg-stone-50 transition group bg-white">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-stone-800 group-hover:text-amber-700">US Subpoena Power</span>
+                                <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">Med Risk</span>
+                            </div>
+                            <p class="text-xs text-stone-500 mt-2">Extraterritorial reach of US courts for data demands.</p>
+                        </div>
+                    </div>
+
+                    <!-- Defense Display Panel -->
+                    <div class="bg-stone-900 text-stone-50 rounded-xl p-6 relative overflow-hidden flex flex-col justify-center min-h-[300px]">
+                        <!-- Background decoration -->
+                        <div class="absolute top-0 right-0 p-4 opacity-10 text-9xl font-serif">§</div>
+                        
+                        <div id="defense-content">
+                            <h4 class="text-amber-500 font-bold uppercase tracking-widest text-xs mb-2">Icelandic Shield Status</h4>
+                            <h3 class="text-2xl font-bold text-white mb-4">Select a Threat to Analyze</h3>
+                            <p class="text-stone-400">Review the specific legal protections afforded by the Icelandic jurisdiction against specific US state statutes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: FINANCIALS -->
+        <section id="view-finance" class="hidden space-y-8 animate-fade-in">
+            <div class="bg-white rounded-lg shadow-sm border border-stone-200 p-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-stone-900">IV. Financial Feasibility</h2>
+                        <p class="text-stone-600">ROI Calculation: Censorship Insurance vs. Standard Overhead.</p>
+                    </div>
+                </div>
+
+                <div class="chart-container mb-8">
+                    <canvas id="financeChart"></canvas>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <div class="p-4 border border-stone-200 rounded bg-stone-50">
+                        <h4 class="font-bold text-stone-900 mb-2">Cost of Sovereignty</h4>
+                        <ul class="text-sm text-stone-600 space-y-2">
+                            <li class="flex justify-between border-b border-stone-200 pb-1">
+                                <span>Annual Hosting (Est):</span> <span class="font-mono font-bold">$400.00</span>
+                            </li>
+                            <li class="flex justify-between border-b border-stone-200 pb-1">
+                                <span>Sectigo PositiveSSL:</span> <span class="font-mono font-bold">$35.00</span>
+                            </li>
+                            <li class="flex justify-between pt-1">
+                                <span>Total Annual:</span> <span class="font-mono font-bold text-stone-900">$435.00</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-4 border-l-4 border-amber-500 bg-amber-50 rounded-r">
+                        <h4 class="font-bold text-stone-900 mb-2">Risk of "Cheap" Hosting</h4>
+                        <p class="text-sm text-stone-700 italic">
+                            "Contrast overhead against the risk of total business loss on US hosts like SiteGround."
+                        </p>
+                        <p class="text-sm text-stone-700 mt-2 font-bold">
+                            Potential Loss: 100% of Asset Value (De-platforming)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-stone-200 mt-auto">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <p class="text-xs text-stone-400">© 2026 Angry Sarge HQ - Strategic Infrastructure Planning.</p>
+            <div class="text-xs text-stone-400 mt-2 md:mt-0">
+                Generated based on Deep Research Master Directive.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // --- State Management ---
+        const appState = {
+            currentTab: 'executive',
+            radarMode: 'us', // 'us' or 'iceland'
+            defenseData: {
+                'ab2571': {
+                    title: "Defense Against CA AB 2571",
+                    text: "Icelandic courts typically do not recognize US state-level civil statutes imposing fines for content legality, provided the content is legal in Iceland. AB 2571's 'marketing to minors' definitions are likely unenforceable without an Icelandic domestic court order, which requires violation of Icelandic law.",
+                    status: "Strong Shield"
+                },
+                'ab1594': {
+                    title: "Defense Against Private Action",
+                    text: "Iceland does not recognize the 'Private Right of Action' for US civil torts in the same manner. A 'bounty-hunting' lawsuit from Illinois or California would likely face dismissal for lack of jurisdiction unless the claimant can prove direct harm occurred within Iceland.",
+                    status: "Strong Shield"
+                },
+                'subpoena': {
+                    title: "Subpoena Protocol",
+                    text: "Foreign entities cannot simply demand data. A US court order must be domesticated through an Icelandic court. This requires a dual-criminality standard (the act must be illegal in BOTH countries). This effectively blocks discovery requests for standard US civil litigation.",
+                    status: "Medium-High Shield"
+                }
+            }
+        };
+
+        // --- Navigation Logic ---
+        function navigateTo(tabId) {
+            // Update Tab Styles
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.classList.remove('tab-active', 'border-stone-800', 'text-stone-900');
+                btn.classList.add('tab-inactive', 'border-transparent', 'text-stone-500');
+            });
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            activeBtn.classList.remove('tab-inactive', 'border-transparent', 'text-stone-500');
+            activeBtn.classList.add('tab-active', 'border-stone-800', 'text-stone-900');
+
+            // Update View Visibility
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+
+            appState.currentTab = tabId;
+        }
+
+        // --- Interactive Functions ---
+        
+        // Legal Firewall Interaction
+        function showDefense(key) {
+            const data = appState.defenseData[key];
+            const contentDiv = document.getElementById('defense-content');
+            
+            // Simple fade effect
+            contentDiv.style.opacity = '0';
+            setTimeout(() => {
+                contentDiv.innerHTML = `
+                    <h4 class="text-amber-500 font-bold uppercase tracking-widest text-xs mb-2">${data.status}</h4>
+                    <h3 class="text-xl font-bold text-white mb-4">${data.title}</h3>
+                    <p class="text-stone-300 leading-relaxed">${data.text}</p>
+                `;
+                contentDiv.style.opacity = '1';
+            }, 200);
+        }
+
+        // --- Chart Initialization ---
+        
+        // Radar Chart Data
+        const radarDataUS = [20, 30, 90, 80, 20]; // Low privacy/legal, High speed/convenience, Low censorship resistance
+        const radarDataIceland = [95, 90, 60, 70, 95]; // High privacy/legal, Med speed (latency), High resistance
+        
+        let radarChartInstance = null;
+
+        function initRadarChart() {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            
+            radarChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Privacy/Sovereignty', 'Legal Shield', 'Network Speed (US)', 'Ease of Tech', 'Censorship Resistance'],
+                    datasets: [{
+                        label: 'Standard US Host',
+                        data: radarDataUS,
+                        fill: true,
+                        backgroundColor: 'rgba(120, 113, 108, 0.2)', // Stone-500
+                        borderColor: 'rgb(120, 113, 108)',
+                        pointBackgroundColor: 'rgb(120, 113, 108)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(120, 113, 108)'
+                    }, {
+                        label: 'Target: Iceland (OrangeWebsite)',
+                        data: radarDataIceland,
+                        fill: true,
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)', // Amber-500
+                        borderColor: 'rgb(245, 158, 11)',
+                        pointBackgroundColor: 'rgb(245, 158, 11)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(245, 158, 11)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: { borderWidth: 2 }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e7e5e4' },
+                            grid: { color: '#e7e5e4' },
+                            pointLabels: {
+                                font: { size: 11, family: 'sans-serif', weight: 'bold' },
+                                color: '#44403c'
+                            },
+                            ticks: { display: false, max: 100, min: 0 }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        function toggleRadarData() {
+            // This toggle is visual only as both datasets are shown for comparison, 
+            // but we can highlight one or update the view if needed.
+            // For now, we'll just animate/update to simulate interaction.
+            radarChartInstance.update();
+        }
+
+        // Financial Chart
+        function initFinanceChart() {
+            const ctx = document.getElementById('financeChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Standard US Host', 'Icelandic Sovereign Host'],
+                    datasets: [
+                        {
+                            label: 'Annual Operational Cost ($)',
+                            data: [150, 435], // Cheap US host vs Iceland
+                            backgroundColor: '#78716c', // Stone-500
+                            stack: 'Stack 0',
+                        },
+                        {
+                            label: 'Risk Cost (Estimated Liability)',
+                            data: [50000, 5000], // High risk of fines/deplatforming vs Low risk
+                            backgroundColor: '#b91c1c', // Red-700
+                            stack: 'Stack 0',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                footer: (tooltipItems) => {
+                                    let total = 0;
+                                    tooltipItems.forEach(function(tooltipItem) {
+                                        total += tooltipItem.raw;
+                                    });
+                                    return 'Total Implied Cost: $' + total;
+                                }
+                            }
+                        },
+                        legend: { position: 'bottom' },
+                        title: {
+                            display: true,
+                            text: 'Operational Overhead vs. Lawfare Risk Exposure'
+                        }
+                    },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { 
+                            beginAtZero: true,
+                            grid: { color: '#f5f5f4' },
+                            title: { display: true, text: 'USD ($)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initRadarChart();
+            initFinanceChart();
+            
+            // Intro animation for defense panel
+            const defenseContent = document.getElementById('defense-content');
+            defenseContent.style.transition = 'opacity 0.3s ease-in-out';
+        });
+
+    </script>
+</body>
+</html>

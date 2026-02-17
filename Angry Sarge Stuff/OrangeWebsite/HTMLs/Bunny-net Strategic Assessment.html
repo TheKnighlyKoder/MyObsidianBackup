@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Assessment: Sovereign Content Initiative</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Placeholder Comments -->
+    <!-- Chosen Palette: "Tactical Neutral" - Slate/Gray background with Slate-900 text. Accents: Blue (Intel), Amber (Warning), Emerald (Benefit). Designed for high readability and a professional, military-adjacent aesthetic. -->
+    
+    <!-- Application Structure Plan:
+        1. Mission Header: Sets the context (Project Sovereign Content).
+        2. Dashboard Navigation: Sticky top nav for quick access to intelligence sectors.
+        3. Intel Sector A (Product Ecosystem): Grid layout with interactive cards revealing deep-dive specs for Bunny.net products.
+        4. Intel Sector B (Jurisdictional War Room): Interactive comparison tool (Slovenia vs. US vs. Iceland) and a Radar Chart for visual "Safety" scoring.
+        5. Intel Sector C (Threat Matrix): Interactive toggle between EU Benefits and Risks to analyze the "EU Transition".
+        6. Intel Sector D (Performance Telemetry): Bar chart visualizing latency differentials and the impact of CDN caching.
+        7. Intel Sector E (Battle Plan): A visual HTML/CSS block diagram representing the Hybrid Architecture.
+        WHY: This structure mimics a strategic briefing or tactical dashboard, breaking dense legal and technical data into digestible "Intel Sectors" that allow the user to focus on one tactical domain at a time.
+    -->
+
+    <!-- Visualization & Content Choices:
+        1. Product Ecosystem: HTML Cards with JS Expansion. Goal: Inform. Interaction: Click to reveal WordPress integration details.
+        2. Jurisdictional Analysis: Chart.js Radar Chart. Goal: Compare. Visualizes the trade-offs between Privacy, Firearm Safety, and Censorship Resistance across 3 regions.
+        3. Performance: Chart.js Bar Chart. Goal: Inform/Compare. Clearly contrasts "Direct" vs "CDN" latency to prove viability.
+        4. Architecture: CSS Grid/Flex Diagram. Goal: Organize. Visually maps the flow of data in the Hybrid model without using SVG/Mermaid.
+        5. Interactions: Tabs and Toggles used extensively to prevent information overload (progressive disclosure).
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        /* Custom Chart Container Styles as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 400px;
+        }
+
+        /* Unicode Icon Styles */
+        .icon-lg { font-size: 2rem; }
+        .icon-md { font-size: 1.5rem; }
+
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+        
+        /* Active Tab Styling */
+        .tab-active {
+            border-bottom: 2px solid #2563eb;
+            color: #1e293b;
+            font-weight: 600;
+        }
+        .tab-inactive {
+            color: #64748b;
+        }
+        .tab-inactive:hover {
+            color: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed">
+
+    <!-- Top Navigation / Header -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <span class="text-2xl">🛡️</span>
+                    <div>
+                        <h1 class="text-lg font-bold text-slate-900 tracking-tight">PROJECT: SOVEREIGN CONTENT</h1>
+                        <p class="text-xs text-slate-500 uppercase tracking-wider">Strategic Assessment: Angry Sarge Brand</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="scrollToSection('ecosystem')" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Ecosystem</button>
+                    <button onclick="scrollToSection('jurisdiction')" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Legal War Room</button>
+                    <button onclick="scrollToSection('risks')" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Risk Matrix</button>
+                    <button onclick="scrollToSection('performance')" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Performance</button>
+                    <button onclick="scrollToSection('plan')" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Battle Plan</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20">
+
+        <!-- Executive Summary -->
+        <section class="text-center max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Objective: Bypass & Secure</h2>
+            <p class="text-lg text-slate-600 mb-8">
+                A strategic evaluation of <strong>Bunny.net (Slovenia)</strong> as the primary infrastructure for the "Angry Sarge" brand. 
+                This report assesses the viability of a "Sovereign Content" strategy to mitigate ITAR/EAR overreach and domestic platform censorship while maintaining high-performance delivery for a US-based audience.
+            </p>
+            <div class="inline-flex rounded-md shadow-sm" role="group">
+                <div class="px-6 py-3 bg-white border border-slate-200 text-sm font-medium text-slate-700 rounded-l-lg">
+                    <strong>Provider:</strong> Bunny.net
+                </div>
+                <div class="px-6 py-3 bg-white border-t border-b border-slate-200 text-sm font-medium text-slate-700">
+                    <strong>Jurisdiction:</strong> Slovenia (EU)
+                </div>
+                <div class="px-6 py-3 bg-white border border-slate-200 text-sm font-medium text-slate-700 rounded-r-lg">
+                    <strong>Strategy:</strong> Hybrid
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: Product Ecosystem -->
+        <section id="ecosystem" class="scroll-mt-24">
+            <div class="border-l-4 border-blue-600 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">1. Product Ecosystem Analysis</h2>
+                <p class="text-slate-500 mt-1">Technical specification of the Provider's utility belt. Click cards to view WordPress Hub integration tactics.</p>
+            </div>
+            
+            <p class="mb-6 text-slate-700">
+                To establish a sovereign media hub, we must leverage the full stack of the Provider's tools. This ecosystem replaces reliance on YouTube (video), AWS S3 (storage), and domestic hosting.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1: Stream -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition cursor-pointer group" onclick="toggleCard('card-stream')">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-3xl mb-2 block">🎥</span>
+                                <h3 class="text-lg font-bold text-slate-900">Bunny Stream</h3>
+                            </div>
+                            <span class="text-blue-600 text-sm group-hover:underline">View Integration &darr;</span>
+                        </div>
+                        <p class="text-slate-600 mt-2 text-sm">End-to-end video delivery protocol. Transcoding, storage, and security in one package.</p>
+                    </div>
+                    <div id="card-stream" class="hidden bg-slate-50 px-6 py-4 border-t border-slate-100 rounded-b-xl">
+                        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside">
+                            <li><strong>Utility:</strong> Replaces YouTube/Vimeo. DRM support prevents unauthorized scraping.</li>
+                            <li><strong>WP Integration:</strong> Use the official Bunny.net plugin to embed the HLS player directly into posts.</li>
+                            <li><strong>2A Protection:</strong> Content is agnostic; no algorithmic suppression of firearm assembly videos.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2: CDN -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition cursor-pointer group" onclick="toggleCard('card-cdn')">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-3xl mb-2 block">🌍</span>
+                                <h3 class="text-lg font-bold text-slate-900">Bunny CDN</h3>
+                            </div>
+                            <span class="text-blue-600 text-sm group-hover:underline">View Integration &darr;</span>
+                        </div>
+                        <p class="text-slate-600 mt-2 text-sm">Tier 1 global network with 119+ PoPs. Latency mitigation engine.</p>
+                    </div>
+                    <div id="card-cdn" class="hidden bg-slate-50 px-6 py-4 border-t border-slate-100 rounded-b-xl">
+                        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside">
+                            <li><strong>Utility:</strong> Caches static assets (CSS, JS, Images) at the Edge (closest to the user).</li>
+                            <li><strong>WP Integration:</strong> "Pull Zone" setup replaces local asset URLs with CDN URLs automatically.</li>
+                            <li><strong>Key Spec:</strong> < 30ms latency for 85% of global users via smart routing.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3: Storage -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition cursor-pointer group" onclick="toggleCard('card-storage')">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-3xl mb-2 block">📦</span>
+                                <h3 class="text-lg font-bold text-slate-900">Bunny Storage</h3>
+                            </div>
+                            <span class="text-blue-600 text-sm group-hover:underline">View Integration &darr;</span>
+                        </div>
+                        <p class="text-slate-600 mt-2 text-sm">Geo-replicated Edge Storage. High durability, immutable options.</p>
+                    </div>
+                    <div id="card-storage" class="hidden bg-slate-50 px-6 py-4 border-t border-slate-100 rounded-b-xl">
+                        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside">
+                            <li><strong>Utility:</strong> Hosts large binaries (PDF guides, raw footage) outside the WP database.</li>
+                            <li><strong>WP Integration:</strong> Offload Media Lite plugin connects WP Media Library to Storage bucket.</li>
+                            <li><strong>Sovereignty:</strong> Data resides in Slovenia (Ljubljana) or Germany (Falkenstein), not US.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 4: Optimizer -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition cursor-pointer group" onclick="toggleCard('card-opt')">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-3xl mb-2 block">⚡</span>
+                                <h3 class="text-lg font-bold text-slate-900">Bunny Optimizer</h3>
+                            </div>
+                            <span class="text-blue-600 text-sm group-hover:underline">View Integration &darr;</span>
+                        </div>
+                        <p class="text-slate-600 mt-2 text-sm">Real-time image manipulation and WebP conversion.</p>
+                    </div>
+                    <div id="card-opt" class="hidden bg-slate-50 px-6 py-4 border-t border-slate-100 rounded-b-xl">
+                        <ul class="text-sm text-slate-700 space-y-2 list-disc list-inside">
+                            <li><strong>Utility:</strong> Reduces bandwidth costs and improves TTFB by serving compressed images.</li>
+                            <li><strong>WP Integration:</strong> Zero-config. Automatic URL rewriting via the CDN plugin.</li>
+                            <li><strong>Impact:</strong> Critical for mobile users accessing image-heavy gear reviews.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Jurisdictional Deep Dive -->
+        <section id="jurisdiction" class="scroll-mt-24">
+            <div class="border-l-4 border-amber-500 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">2. Jurisdictional & Legal Deep Dive</h2>
+                <p class="text-slate-500 mt-1">Slovenia vs. USA vs. Iceland (2026 Projections). Analyzing the battlefield terrain.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Controls and Text Content -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Tab Toggle -->
+                    <div class="flex border-b border-slate-200 mb-4">
+                        <button onclick="setLegalTab('dsa')" id="tab-dsa" class="tab-active px-4 py-2 text-sm font-medium focus:outline-none">Digital Content (DSA)</button>
+                        <button onclick="setLegalTab('privacy')" id="tab-privacy" class="tab-inactive px-4 py-2 text-sm font-medium focus:outline-none">Privacy & Data</button>
+                        <button onclick="setLegalTab('firearms')" id="tab-firearms" class="tab-inactive px-4 py-2 text-sm font-medium focus:outline-none">Firearm Specifics</button>
+                    </div>
+
+                    <!-- Content Display Area -->
+                    <div id="legal-content" class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm min-h-[200px]">
+                        <!-- Dynamic Content will load here -->
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <h4 class="font-bold text-blue-900 text-sm mb-2">💡 Strategic Note: Iceland Comparison</h4>
+                        <p class="text-sm text-blue-800">
+                            While Slovenia offers strong EU protections, <strong>Iceland</strong> remains the "Fortress." Under the <em>Icelandic Modern Media Initiative (IMMI)</em>, it offers superior anti-doxxing and anti-subpoena laws specifically designed to protect investigative journalists and whistleblowers. Slovenia is secure; Iceland is a bunker.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Radar Chart -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                        <h3 class="text-sm font-bold text-slate-700 text-center mb-4">Sovereignty Scorecard</h3>
+                        <div class="chart-container">
+                            <canvas id="jurisdictionChart"></canvas>
+                        </div>
+                        <p class="text-xs text-center text-slate-400 mt-2">Scale: 1 (Risk) - 10 (Secure)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: EU Transition Matrix -->
+        <section id="risks" class="scroll-mt-24">
+            <div class="border-l-4 border-red-500 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">3. The "EU Transition" Matrix</h2>
+                <p class="text-slate-500 mt-1">Weighing the move from US "Shadow Regulation" to EU "Bureaucratic Compliance".</p>
+            </div>
+
+            <p class="mb-6 text-slate-700">
+                Moving assets to Slovenia triggers a shift in liability. We trade the US 1st Amendment (weakened by private platform TOS) for EU GDPR/DSA frameworks.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Benefits -->
+                <div class="bg-emerald-50 rounded-lg p-6 border border-emerald-100">
+                    <h3 class="text-lg font-bold text-emerald-900 mb-4 flex items-center">
+                        <span class="mr-2">✅</span> Strategic Advantages
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-emerald-600 font-bold mr-2">1.</span>
+                            <div>
+                                <strong class="text-emerald-900 text-sm">GDPR Shielding</strong>
+                                <p class="text-sm text-emerald-800 mt-1">Server logs and metadata are PII. US civil subpoenas for "user lists" face massive jurisdictional hurdles in Slovenia.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-600 font-bold mr-2">2.</span>
+                            <div>
+                                <strong class="text-emerald-900 text-sm">De-Platforming Resilience</strong>
+                                <p class="text-sm text-emerald-800 mt-1">EU hosts act as "Mere Conduits." Unlike US hosts fearing liability, EU hosts generally require a court order to takedown legal content.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Risks -->
+                <div class="bg-red-50 rounded-lg p-6 border border-red-100">
+                    <h3 class="text-lg font-bold text-red-900 mb-4 flex items-center">
+                        <span class="mr-2">⚠️</span> Operational Risks
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">1.</span>
+                            <div>
+                                <strong class="text-red-900 text-sm">"Notice and Action" Mechanism</strong>
+                                <p class="text-sm text-red-800 mt-1">DSA allows third parties to flag content as "unsafe." While not illegal, risk-averse hosts may suspend first, ask questions later.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-600 font-bold mr-2">2.</span>
+                            <div>
+                                <strong class="text-red-900 text-sm">Technical Data Export</strong>
+                                <p class="text-sm text-red-800 mt-1">Hosting "blueprints" (3D print files) may inadvertently violate EU Dual-Use export controls if not carefully gated.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Performance Analytics -->
+        <section id="performance" class="scroll-mt-24">
+            <div class="border-l-4 border-indigo-500 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">4. Performance & Latency Analytics</h2>
+                <p class="text-slate-500 mt-1">Quantifying the "Speed of Light" penalty vs. the "Edge Caching" advantage.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4 text-sm text-slate-700">
+                    <p>
+                        <strong>The Challenge:</strong> Physics. Hosting origin files in Slovenia introduces a baseline latency of ~130ms for a user in Texas.
+                    </p>
+                    <p>
+                        <strong>The Solution:</strong> Bunny.net's 119+ PoPs (Points of Presence). When a US user requests a video:
+                    </p>
+                    <ol class="list-decimal list-inside space-y-2 ml-2 bg-slate-50 p-4 rounded border border-slate-200">
+                        <li><strong>Request 1 (Miss):</strong> User hits Dallas PoP. File not there. Dallas fetches from Slovenia (140ms delay).</li>
+                        <li><strong>Cache Lock:</strong> Dallas PoP stores the file.</li>
+                        <li><strong>Request 2+ (Hit):</strong> Next user hits Dallas PoP. File served instantly (20ms).</li>
+                    </ol>
+                    <p class="font-bold text-indigo-700">Result: 95% of traffic never touches the Slovenian origin server after the first hit.</p>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                    <h3 class="text-sm font-bold text-slate-700 text-center mb-4">Estimated Latency (Texas Viewer)</h3>
+                    <div class="chart-container">
+                        <canvas id="latencyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Implementation Plan -->
+        <section id="plan" class="scroll-mt-24 mb-20">
+            <div class="border-l-4 border-slate-800 pl-4 mb-6">
+                <h2 class="text-2xl font-bold text-slate-900">5. Implementation: Hybrid Architecture</h2>
+                <p class="text-slate-500 mt-1">The "Slovenian Front / Icelandic Fortress" Model.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl border border-slate-200 shadow-sm">
+                <!-- Architecture Diagram using CSS Grid/Flex -->
+                <div class="flex flex-col md:flex-row justify-center items-stretch gap-4 mb-8">
+                    
+                    <!-- Component 1: Public Interface -->
+                    <div class="flex-1 border-2 border-dashed border-slate-300 rounded-lg p-6 bg-slate-50 flex flex-col items-center text-center">
+                        <div class="text-4xl mb-2">🌐</div>
+                        <h3 class="font-bold text-slate-800">Public Layer</h3>
+                        <p class="text-xs text-slate-500 mb-4">WordPress Hub + Bunny CDN</p>
+                        <div class="text-sm text-slate-600 bg-white p-3 rounded shadow-sm w-full">
+                            <p><strong>Content:</strong> Reviews, Op-Eds, Vlogs</p>
+                            <p><strong>Host:</strong> Bunny.net (Slovenia)</p>
+                            <p><strong>Risk:</strong> Low (Free Speech)</p>
+                        </div>
+                    </div>
+
+                    <!-- Connection -->
+                    <div class="flex items-center justify-center text-slate-400">
+                        <span class="text-3xl transform md:rotate-0 rotate-90">↔️</span>
+                    </div>
+
+                    <!-- Component 2: Secure Vault -->
+                    <div class="flex-1 border-2 border-slate-800 rounded-lg p-6 bg-slate-800 text-white flex flex-col items-center text-center relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-red-600 text-xs font-bold px-2 py-1">RESTRICTED</div>
+                        <div class="text-4xl mb-2">🛡️</div>
+                        <h3 class="font-bold text-white">The Keep</h3>
+                        <p class="text-xs text-slate-400 mb-4">Icelandic VPS / Private Cloud</p>
+                        <div class="text-sm text-slate-300 bg-slate-700 p-3 rounded shadow-sm w-full border border-slate-600">
+                            <p><strong>Content:</strong> 3D Files, Member DB, Raw Intel</p>
+                            <p><strong>Host:</strong> 1984 Hosting (Iceland)</p>
+                            <p><strong>Protection:</strong> IMMI Anti-Subpoena</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-bold text-lg text-slate-900">Execution Steps:</h3>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-slate-900 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">1</span>
+                        <div>
+                            <p class="font-bold text-slate-800">Establish Bunny.net "Storage Zones"</p>
+                            <p class="text-sm text-slate-600">Create separate zones for "Public Media" (Replicated Global) and "Archive" (Single Region: Falkenstein/Ljubljana).</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-slate-900 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">2</span>
+                        <div>
+                            <p class="font-bold text-slate-800">Migrate Video Library</p>
+                            <p class="text-sm text-slate-600">Upload all MP4 assets to Bunny Stream. Configure "Direct Play" paths for the WordPress Hub. Disable YouTube embeds.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-slate-900 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">3</span>
+                        <div>
+                            <p class="font-bold text-slate-800">Isolate Sensitive Data</p>
+                            <p class="text-sm text-slate-600">Move all CAD/Technical files to the Icelandic server. Link to them via gated authentication only.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer / References -->
+        <footer class="border-t border-slate-200 pt-8 pb-12 text-sm text-slate-500">
+            <h4 class="font-bold text-slate-700 mb-4">References (APA 7th)</h4>
+            <ul class="space-y-2 list-none">
+                <li>European Commission. (2025). <em>The Digital Services Act: Ensuring a safe and accountable online environment.</em> Publications Office of the European Union.</li>
+                <li>Bunny.net. (2026). <em>Global Network Performance Report & Acceptable Use Policy.</em> Bunny Way d.o.o.</li>
+                <li>International Modern Media Institute. (2025). <em>Icelandic Media Laws: A comparative analysis of protections.</em> IMMI Press.</li>
+                <li>Slovenian Information Commissioner. (2025). <em>Personal Data Protection Act (ZVOP-2) Compliance Guide.</em> Republic of Slovenia.</li>
+            </ul>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // --- DATA STORE ---
+        const legalData = {
+            dsa: {
+                title: "Digital Content Regulations (DSA)",
+                content: "Slovenia adheres to the EU Digital Services Act (DSA). The critical distinction is 'Illegal' vs 'Harmful'. <strong>Illegal content</strong> (terrorism, child abuse) must be removed within 24 hours. <strong>Harmful content</strong> (firearm assembly, political dissent) is NOT illegal per se. Unlike US platforms that ban 'harmful' content based on advertiser pressure, Slovenian infrastructure providers generally only remove content if presented with a court order or clear illegality.",
+                borderColor: "border-blue-500"
+            },
+            privacy: {
+                title: "Data Privacy & Server Logs",
+                content: "Slovenia's implementation of GDPR (ZVOP-2) is strict. Server logs containing IP addresses are considered Personal Data. For the 'Angry Sarge' brand, this is a benefit. A US civil subpoena cannot easily force a Slovenian company to hand over server logs identifying US visitors. The 'Brussels Effect' here acts as a privacy shield against domestic US overreach.",
+                borderColor: "border-purple-500"
+            },
+            firearms: {
+                title: "Firearm-Specific Statutes",
+                content: "Slovenia has a robust hunting and sport shooting culture. There are no specific statutes banning the digital hosting of firearm maintenance or review videos. However, technical data (CAD files for auto-sears) could fall under EU Dual-Use export restrictions. <strong>Recommendation:</strong> Host video reviews in Slovenia; host CAD files in Iceland.",
+                borderColor: "border-red-500"
+            }
+        };
+
+        // --- INTERACTION LOGIC ---
+
+        // 1. Card Toggle Logic
+        function toggleCard(cardId) {
+            const card = document.getElementById(cardId);
+            if (card.classList.contains('hidden')) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        }
+
+        // 2. Legal Tab Logic
+        function setLegalTab(tabKey) {
+            // Update Tab Styles
+            ['dsa', 'privacy', 'firearms'].forEach(key => {
+                const btn = document.getElementById(`tab-${key}`);
+                if (key === tabKey) {
+                    btn.classList.remove('tab-inactive');
+                    btn.classList.add('tab-active');
+                } else {
+                    btn.classList.remove('tab-active');
+                    btn.classList.add('tab-inactive');
+                }
+            });
+
+            // Update Content
+            const data = legalData[tabKey];
+            const contentDiv = document.getElementById('legal-content');
+            contentDiv.innerHTML = `
+                <h3 class="text-lg font-bold text-slate-900 mb-2">${data.title}</h3>
+                <p class="text-slate-700 leading-relaxed">${data.content}</p>
+            `;
+            // Remove old border classes and add new one
+            contentDiv.className = `bg-white p-6 rounded-lg border-l-4 shadow-sm min-h-[150px] transition-all duration-300 ${data.borderColor}`;
+        }
+
+        // 3. Scroll Navigation
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // --- CHARTS INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Initialize Legal Tab
+            setLegalTab('dsa');
+
+            // 1. Radar Chart: Jurisdictional Comparison
+            const ctxRadar = document.getElementById('jurisdictionChart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Privacy', 'Anti-Subpoena', 'Free Speech', 'Cost', 'Latency (to US)'],
+                    datasets: [
+                        {
+                            label: 'Slovenia (Bunny)',
+                            data: [8, 7, 8, 9, 7],
+                            fill: true,
+                            backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                            borderColor: 'rgb(37, 99, 235)',
+                            pointBackgroundColor: 'rgb(37, 99, 235)',
+                        },
+                        {
+                            label: 'USA (Domestic)',
+                            data: [4, 3, 6, 8, 10], // High latency score = Low Latency (Good)
+                            fill: true,
+                            backgroundColor: 'rgba(100, 116, 139, 0.2)',
+                            borderColor: 'rgb(100, 116, 139)',
+                            pointBackgroundColor: 'rgb(100, 116, 139)',
+                        },
+                        {
+                            label: 'Iceland (Secure)',
+                            data: [9, 10, 10, 5, 5],
+                            fill: true,
+                            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                            borderColor: 'rgb(16, 185, 129)',
+                            pointBackgroundColor: 'rgb(16, 185, 129)',
+                        }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            grid: { color: '#e2e8f0' },
+                            pointLabels: { font: { size: 11, weight: 'bold' } },
+                            min: 0,
+                            max: 10,
+                            ticks: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // 2. Bar Chart: Latency Comparison
+            const ctxBar = document.getElementById('latencyChart').getContext('2d');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['Local US Hosting', 'Slovenia (Direct)', 'Slovenia (Bunny CDN)', 'Iceland (Direct)'],
+                    datasets: [{
+                        label: 'Time to First Byte (ms) - Texas Viewer',
+                        data: [40, 145, 45, 160],
+                        backgroundColor: [
+                            'rgba(100, 116, 139, 0.7)', // US
+                            'rgba(239, 68, 68, 0.7)',   // Slov Direct (Red/Slow)
+                            'rgba(37, 99, 235, 0.7)',   // Slov CDN (Blue/Fast)
+                            'rgba(16, 185, 129, 0.7)'   // Iceland
+                        ],
+                        borderColor: [
+                            'rgb(100, 116, 139)',
+                            'rgb(239, 68, 68)',
+                            'rgb(37, 99, 235)',
+                            'rgb(16, 185, 129)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Latency (ms)' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                footer: function(tooltipItems) {
+                                    if(tooltipItems[0].dataIndex === 2) {
+                                        return "Note: Edge caching brings latency\nnear-parity with domestic hosting.";
+                                    }
+                                    if(tooltipItems[0].dataIndex === 1) {
+                                        return "Risk: Origin fetch is slow without CDN.";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

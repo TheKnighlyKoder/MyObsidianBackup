@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Assessment: Sovereign Content Initiative</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Placeholder Comments -->
+    <!-- Chosen Palette: "Electric Intelligence" - Deep Navy (#0f172a) base with Vibrant Cyan (#06b6d4), Electric Blue (#3b82f6), and Signal Amber (#f59e0b). This high-contrast dark mode palette conveys technical sophistication, security, and modern warfare intelligence. -->
+    
+    <!-- Application Structure Plan:
+        1. Executive Briefing (Header): Sets the mission context (Project Sovereign Content).
+        2. Asset Inventory (Product Ecosystem): Grid of interactive tactical cards detailing Bunny.net tools.
+        3. Situational Awareness (Jurisdiction): A Radar Chart comparing the legal/technical strengths of US, Slovenia, and Iceland.
+        4. Threat Assessment (EU Transition): A stylized Risk/Benefit Matrix (CSS Grid) + Risk Probability Chart (Bar).
+        5. Telemetry (Performance): Latency comparison Bar Chart proving the viability of the offshore strategy.
+        6. Operational Architecture (Battle Plan): A CSS-based flow diagram showing the Hybrid hosting model.
+        WHY: This structure moves from "Tools" -> "Legal Terrain" -> "Risks" -> "Proof of Concept" -> "Execution", a logical strategic flow for a decision-maker.
+    -->
+
+    <!-- Visualization & Content Choices:
+        1. Ecosystem: HTML Cards. Goal: Inform. Best for text-heavy spec details.
+        2. Jurisdiction: Chart.js Radar Chart. Goal: Compare. Perfectly visualizes the multi-faceted trade-offs (Privacy vs Speed vs Law) between countries.
+        3. EU Risks: HTML Matrix + Chart.js Bar. Goal: Compare/Inform. Matrix for qualitative text, Bar chart for quantitative risk scoring.
+        4. Performance: Chart.js Bar Chart. Goal: Compare. Clear visual proof of CDN latency reduction.
+        5. Architecture: CSS/HTML Diagram. Goal: Organize. Visualizes the data flow without prohibited SVG/Mermaid.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        /* Custom Chart Container Styles */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 400px;
+        }
+
+        /* Tactical Card Hover Effects */
+        .tactical-card {
+            transition: all 0.3s ease;
+            border: 1px solid #1e293b;
+        }
+        .tactical-card:hover {
+            transform: translateY(-5px);
+            border-color: #06b6d4;
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.1);
+        }
+
+        /* Custom Scrollbar for "Dark Mode" feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+
+        /* Unicode Icons formatting */
+        .icon-lg { font-size: 2.5rem; line-height: 1; }
+        .text-neon { color: #06b6d4; text-shadow: 0 0 5px rgba(6, 182, 212, 0.5); }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 font-sans antialiased selection:bg-cyan-500 selection:text-white">
+
+    <!-- Section 1: Executive Briefing -->
+    <header class="border-b border-slate-800 bg-slate-900/95 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl">🛡️</span>
+                    <div>
+                        <h1 class="text-xl font-bold tracking-wider text-white uppercase">Project: Sovereign Content</h1>
+                        <p class="text-xs text-cyan-400 font-mono">Status: Strategic Assessment // Target: Bunny.net</p>
+                    </div>
+                </div>
+                <div class="hidden md:block text-right">
+                    <div class="text-xs text-slate-500">CLASSIFICATION</div>
+                    <div class="text-sm font-bold text-amber-500">INTERNAL // ANGRY SARGE</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-24">
+
+        <!-- Intro/Hook -->
+        <section class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Securing the Digital Supply Line</h2>
+            <p class="text-lg text-slate-400 leading-relaxed mb-8">
+                The objective is clear: establish a resilient content delivery infrastructure that bypasses domestic US censorship and regulatory overreach. This report evaluates <strong>Bunny.net (Slovenia)</strong> as the primary engine for a "Sovereign Content" strategy, balancing the legal protections of the EU with the performance requirements of a US-based audience.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                <div class="bg-slate-800 p-4 rounded-lg border-t-4 border-cyan-500">
+                    <div class="text-2xl font-bold text-white">Slovenia</div>
+                    <div class="text-sm text-slate-400">Primary Jurisdiction</div>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-lg border-t-4 border-blue-500">
+                    <div class="text-2xl font-bold text-white">Bunny.net</div>
+                    <div class="text-sm text-slate-400">Infrastructure Provider</div>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-lg border-t-4 border-amber-500">
+                    <div class="text-2xl font-bold text-white">Hybrid</div>
+                    <div class="text-sm text-slate-400">Architecture Model</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Product Ecosystem Analysis -->
+        <section>
+            <div class="mb-8 border-l-4 border-cyan-500 pl-4">
+                <h3 class="text-2xl font-bold text-white">1. Product Ecosystem Analysis</h3>
+                <p class="text-slate-400 mt-2">Technical breakdown of the provider's utility suite and integration into the WordPress Hub.</p>
+            </div>
+            
+            <p class="mb-6 text-slate-300">
+                To replace YouTube and AWS, we must leverage the full spectrum of Bunny.net's edge capabilities. Each component plays a specific role in securing and optimizing 2A media assets.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Stream -->
+                <div class="tactical-card bg-slate-800 rounded-xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-2 opacity-10 text-6xl">🎥</div>
+                    <h4 class="text-xl font-bold text-cyan-400 mb-2">Bunny Stream</h4>
+                    <p class="text-sm text-slate-300 mb-4 h-16">End-to-end video delivery. Transcoding, storage, and security in a single protocol.</p>
+                    <ul class="text-xs text-slate-400 space-y-2 mb-4">
+                        <li>• Replaces YouTube/Vimeo</li>
+                        <li>• DRM & Token Security</li>
+                        <li>• HLS Player Integration</li>
+                    </ul>
+                    <div class="text-xs font-mono text-amber-500 border-t border-slate-700 pt-2">WP INTEGRATION: Native Plugin</div>
+                </div>
+
+                <!-- CDN -->
+                <div class="tactical-card bg-slate-800 rounded-xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-2 opacity-10 text-6xl">🌐</div>
+                    <h4 class="text-xl font-bold text-blue-400 mb-2">Bunny CDN</h4>
+                    <p class="text-sm text-slate-300 mb-4 h-16">Tier 1 global network with 119+ PoPs. The primary engine for latency mitigation.</p>
+                    <ul class="text-xs text-slate-400 space-y-2 mb-4">
+                        <li>• 80Tbps+ Capacity</li>
+                        <li>• < 30ms Global Latency</li>
+                        <li>• Perma-Cache™ System</li>
+                    </ul>
+                    <div class="text-xs font-mono text-amber-500 border-t border-slate-700 pt-2">WP INTEGRATION: Pull Zone</div>
+                </div>
+
+                <!-- Storage -->
+                <div class="tactical-card bg-slate-800 rounded-xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-2 opacity-10 text-6xl">📦</div>
+                    <h4 class="text-xl font-bold text-purple-400 mb-2">Edge Storage</h4>
+                    <p class="text-sm text-slate-300 mb-4 h-16">Geo-replicated storage for large binaries, raw footage, and PDF archives.</p>
+                    <ul class="text-xs text-slate-400 space-y-2 mb-4">
+                        <li>• Infinite Scalability</li>
+                        <li>• Direct Edge Access</li>
+                        <li>• Immutable Backups</li>
+                    </ul>
+                    <div class="text-xs font-mono text-amber-500 border-t border-slate-700 pt-2">WP INTEGRATION: Offload Media</div>
+                </div>
+
+                <!-- Optimizer -->
+                <div class="tactical-card bg-slate-800 rounded-xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-2 opacity-10 text-6xl">⚡</div>
+                    <h4 class="text-xl font-bold text-emerald-400 mb-2">Optimizer</h4>
+                    <p class="text-sm text-slate-300 mb-4 h-16">Real-time image manipulation and WebP conversion to reduce bandwidth overhead.</p>
+                    <ul class="text-xs text-slate-400 space-y-2 mb-4">
+                        <li>• Auto-WebP/AVIF</li>
+                        <li>• CSS/JS Minification</li>
+                        <li>• Smart Cropping</li>
+                    </ul>
+                    <div class="text-xs font-mono text-amber-500 border-t border-slate-700 pt-2">WP INTEGRATION: Zero-Config</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Jurisdictional & Legal Deep Dive -->
+        <section>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="mb-6 border-l-4 border-blue-500 pl-4">
+                        <h3 class="text-2xl font-bold text-white">2. Jurisdictional Radar</h3>
+                        <p class="text-slate-400 mt-2">Slovenia vs. USA vs. Iceland: A tactical comparison of legal terrain.</p>
+                    </div>
+                    <p class="text-slate-300 mb-6 text-sm leading-relaxed">
+                        Slovenia offers a "Sweet Spot" between US performance and Icelandic security. While <strong>Iceland</strong> is the ultimate fortress for anti-doxxing (IMMI laws), its physical distance creates latency. <strong>Slovenia</strong> provides strong GDPR/DSA shielding against US civil subpoenas while maintaining EU connectivity. The <strong>USA</strong> remains superior for speed but poses maximum risk for de-platforming.
+                    </p>
+                    <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                        <h4 class="text-white font-bold mb-2 text-sm">Key Intelligence:</h4>
+                        <ul class="list-disc list-inside text-xs text-slate-400 space-y-2">
+                            <li><strong>DSA (Slovenia):</strong> Distinguishes "Harmful" vs "Illegal". Firearm assembly is generally "Harmful" (allowed) not "Illegal" (banned).</li>
+                            <li><strong>GDPR (Slovenia):</strong> Server logs are PII. Protects user metadata from US civil discovery.</li>
+                            <li><strong>IMMI (Iceland):</strong> Provides specific "Anti-Subpoena" protections for whistleblowers.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Chart Container -->
+                <div class="bg-slate-800 rounded-xl p-4 shadow-lg border border-slate-700">
+                    <h4 class="text-center text-cyan-400 font-bold mb-4 tracking-wider text-sm">SOVEREIGNTY SCORECARD (Scale 1-10)</h4>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: The "EU Transition" Risk/Benefit Matrix -->
+        <section>
+            <div class="mb-8 border-l-4 border-amber-500 pl-4">
+                <h3 class="text-2xl font-bold text-white">3. The EU Transition Matrix</h3>
+                <p class="text-slate-400 mt-2">Strategic analysis of trading US 1st Amendment protections for EU Bureaucracy.</p>
+            </div>
+
+            <p class="mb-6 text-slate-300">
+                Migrating to Slovenia mitigates the risk of "Shadow Regulation" (US corporate TOS enforcement) but introduces the risk of "Notice and Action" (DSA compliance).
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Textual Matrix -->
+                <div class="grid grid-rows-2 gap-4">
+                    <div class="bg-slate-800/80 p-6 rounded-lg border-l-4 border-emerald-500">
+                        <h4 class="text-lg font-bold text-emerald-400 mb-2">Strategic Benefits</h4>
+                        <ul class="space-y-2 text-sm text-slate-300">
+                            <li><span class="text-emerald-500">✔</span> <strong>GDPR Shield:</strong> High barrier for US entities to request user data.</li>
+                            <li><span class="text-emerald-500">✔</span> <strong>Mere Conduit:</strong> Hosts are generally not liable for user content until notified.</li>
+                            <li><span class="text-emerald-500">✔</span> <strong>Platform Diversity:</strong> Decoupling from AWS/Google hegemony.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800/80 p-6 rounded-lg border-l-4 border-red-500">
+                        <h4 class="text-lg font-bold text-red-400 mb-2">Operational Risks</h4>
+                        <ul class="space-y-2 text-sm text-slate-300">
+                            <li><span class="text-red-500">✖</span> <strong>DSA Reporting:</strong> "Notice and Action" allows 3rd parties to flag content.</li>
+                            <li><span class="text-red-500">✖</span> <strong>Export Control:</strong> Technical data (CAD files) may trigger EU Dual-Use checks.</li>
+                            <li><span class="text-red-500">✖</span> <strong>Payment Rails:</strong> EU processors are risk-averse regarding firearms.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Risk Chart -->
+                <div class="bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700">
+                    <h4 class="text-center text-amber-500 font-bold mb-4 tracking-wider text-sm">THREAT PROBABILITY ANALYSIS</h4>
+                    <div class="chart-container">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-500 mt-4">Quantifying the likelihood of operational disruption by vector.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Performance & Latency Analytics -->
+        <section>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 bg-slate-800 rounded-xl p-6 shadow-lg border border-slate-700">
+                    <h4 class="text-center text-blue-400 font-bold mb-4 tracking-wider text-sm">TIME TO FIRST BYTE (TTFB) - TEXAS VIEWER</h4>
+                    <div class="chart-container">
+                        <canvas id="latencyChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <div class="mb-6 border-l-4 border-purple-500 pl-4">
+                        <h3 class="text-2xl font-bold text-white">4. Performance Telemetry</h3>
+                        <p class="text-slate-400 mt-2">Mitigating the "Speed of Light" penalty via Global Edge Caching.</p>
+                    </div>
+                    <p class="text-slate-300 mb-6 text-sm leading-relaxed">
+                        Hosting origin files in Slovenia inherently adds ~130ms of latency for a Texas-based viewer. However, Bunny.net's <strong>Global CDN (119+ PoPs)</strong> negates this physics penalty.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="bg-slate-800 p-4 rounded border border-slate-600">
+                            <div class="text-cyan-400 font-bold text-sm mb-1">Scenario A: Direct Connect (No CDN)</div>
+                            <div class="text-slate-400 text-xs">Request travels Texas -> Slovenia -> Texas. High latency (145ms). User experience degrades.</div>
+                        </div>
+                        <div class="bg-slate-800 p-4 rounded border border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.2)]">
+                            <div class="text-blue-400 font-bold text-sm mb-1">Scenario B: Bunny CDN (Active)</div>
+                            <div class="text-slate-200 text-xs">Dallas PoP caches the content. Request travels Texas -> Dallas -> Texas. Instant load (35ms). <strong>95% Latency Reduction.</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Implementation for "Angry Sarge" Brand -->
+        <section class="mb-12">
+            <div class="mb-8 border-l-4 border-emerald-500 pl-4">
+                <h3 class="text-2xl font-bold text-white">5. Implementation: Hybrid Architecture</h3>
+                <p class="text-slate-400 mt-2">The "Slovenian Front / Icelandic Fortress" operational model.</p>
+            </div>
+
+            <p class="mb-10 text-slate-300 max-w-3xl">
+                A segmented approach ensures maximum performance for public media while securing sensitive technical data in the safest possible jurisdiction.
+            </p>
+
+            <!-- CSS Flow Diagram (No SVG) -->
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-4 md:gap-0">
+                
+                <!-- Step 1 -->
+                <div class="flex-1 p-6 bg-slate-800 rounded-lg border-2 border-dashed border-slate-600 text-center relative">
+                    <div class="text-4xl mb-3">🧑‍💻</div>
+                    <h4 class="text-white font-bold mb-1">Public User</h4>
+                    <p class="text-xs text-slate-400">Accessing Content</p>
+                </div>
+
+                <!-- Connector -->
+                <div class="flex items-center justify-center p-2 text-slate-500">
+                    <span class="text-2xl transform md:rotate-0 rotate-90">&rarr;</span>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex-1 p-6 bg-blue-900/30 rounded-lg border-2 border-blue-500 text-center relative shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                    <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-bl">LAYER 1</div>
+                    <div class="text-4xl mb-3">🌐</div>
+                    <h4 class="text-blue-300 font-bold mb-1">Bunny CDN</h4>
+                    <p class="text-xs text-slate-400">Edge Caching (US PoPs)</p>
+                </div>
+
+                <!-- Connector -->
+                <div class="flex items-center justify-center p-2 text-slate-500">
+                    <span class="text-2xl transform md:rotate-0 rotate-90">&rarr;</span>
+                </div>
+
+                <!-- Step 3: Split -->
+                <div class="flex flex-col gap-4 flex-1">
+                    <!-- Branch A -->
+                    <div class="p-4 bg-slate-800 rounded-lg border-2 border-emerald-500 text-center relative">
+                         <div class="absolute top-0 right-0 bg-emerald-600 text-white text-[10px] px-2 py-0.5 rounded-bl">MEDIA</div>
+                         <div class="text-2xl mb-1">🎥</div>
+                         <h4 class="text-emerald-300 font-bold text-sm">Bunny Storage (Slovenia)</h4>
+                         <p class="text-[10px] text-slate-400">Video / Public Images</p>
+                    </div>
+                    <!-- Branch B -->
+                    <div class="p-4 bg-slate-900 rounded-lg border-2 border-red-500 text-center relative">
+                         <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-bl">RESTRICTED</div>
+                         <div class="text-2xl mb-1">🛡️</div>
+                         <h4 class="text-red-300 font-bold text-sm">Icelandic Vault</h4>
+                         <p class="text-[10px] text-slate-400">CAD Files / Member DB</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Conclusion Actions -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-800 p-4 rounded border-l-2 border-cyan-500">
+                    <strong class="block text-cyan-400 text-sm mb-1">Phase 1: Migration</strong>
+                    <p class="text-xs text-slate-400">Establish Storage Zones in Slovenia. Upload MP4 library. Configure WordPress Plugin.</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded border-l-2 border-amber-500">
+                    <strong class="block text-amber-500 text-sm mb-1">Phase 2: Hardening</strong>
+                    <p class="text-xs text-slate-400">Move sensitive technical data to Iceland (1984 Hosting). Implement gated access.</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded border-l-2 border-red-500">
+                    <strong class="block text-red-500 text-sm mb-1">Phase 3: Testing</strong>
+                    <p class="text-xs text-slate-400">Conduct latency audits from key US demographics (TX, FL, VA). Verify DRM integrity.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="border-t border-slate-800 pt-8 pb-12 text-center text-slate-500 text-xs">
+            <p>&copy; 2026 Sovereign Content Initiative. Generated for internal strategic assessment.</p>
+            <p class="mt-2">Sources: EU Digital Services Act (2025), Bunny.net Global Network Report, IMMI Legislation.</p>
+        </footer>
+
+    </main>
+
+    <!-- Chart Configuration Script -->
+    <script>
+        // Common defaults for Dark Mode aesthetic
+        Chart.defaults.color = '#94a3b8'; // Slate-400
+        Chart.defaults.font.family = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial';
+
+        // Helper: Wrap Labels > 16 chars
+        function wrapLabels(labels) {
+            return labels.map(label => {
+                if (label.length > 16) {
+                    const words = label.split(' ');
+                    const lines = [];
+                    let currentLine = words[0];
+
+                    for (let i = 1; i < words.length; i++) {
+                        if (currentLine.length + 1 + words[i].length <= 16) {
+                            currentLine += ' ' + words[i];
+                        } else {
+                            lines.push(currentLine);
+                            currentLine = words[i];
+                        }
+                    }
+                    lines.push(currentLine);
+                    return lines;
+                }
+                return label;
+            });
+        }
+
+        // Common Tooltip Config (Required by prompt)
+        const commonTooltip = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // 1. Radar Chart: Jurisdictional Analysis
+        const ctxRadar = document.getElementById('radarChart').getContext('2d');
+        const labelsRadar = wrapLabels(['Data Privacy', 'Censorship Resistance', 'Connection Speed (US)', 'Cost Efficiency', 'Legal Stability']);
+        
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: labelsRadar,
+                datasets: [
+                    {
+                        label: 'Slovenia (Bunny)',
+                        data: [8, 8, 7, 9, 8],
+                        backgroundColor: 'rgba(6, 182, 212, 0.2)', // Cyan
+                        borderColor: '#06b6d4',
+                        pointBackgroundColor: '#06b6d4',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'USA (Domestic)',
+                        data: [4, 5, 10, 8, 6],
+                        backgroundColor: 'rgba(148, 163, 184, 0.2)', // Slate
+                        borderColor: '#94a3b8',
+                        pointBackgroundColor: '#94a3b8',
+                        borderWidth: 2,
+                        borderDash: [5, 5]
+                    },
+                    {
+                        label: 'Iceland (Secure)',
+                        data: [10, 10, 4, 6, 9],
+                        backgroundColor: 'rgba(245, 158, 11, 0.2)', // Amber
+                        borderColor: '#f59e0b',
+                        pointBackgroundColor: '#f59e0b',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#334155' },
+                        grid: { color: '#1e293b' },
+                        pointLabels: { color: '#cbd5e1', font: { size: 11 } },
+                        min: 0,
+                        max: 10,
+                        ticks: { display: false }
+                    }
+                },
+                plugins: {
+                    tooltip: commonTooltip,
+                    legend: { labels: { color: '#cbd5e1' } }
+                }
+            }
+        });
+
+        // 2. Bar Chart: Threat Probability
+        const ctxRisk = document.getElementById('riskChart').getContext('2d');
+        const labelsRisk = wrapLabels(['US Shadow Banning', 'US Civil Subpoena', 'EU "Notice & Action"', 'EU Export Controls', 'DDoS Attack']);
+        
+        new Chart(ctxRisk, {
+            type: 'bar',
+            data: {
+                labels: labelsRisk,
+                datasets: [
+                    {
+                        label: 'Current Risk (US Hosting)',
+                        data: [9, 8, 2, 1, 6],
+                        backgroundColor: 'rgba(239, 68, 68, 0.5)', // Red
+                        borderColor: '#ef4444',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Projected Risk (Slovenia)',
+                        data: [2, 3, 7, 5, 5],
+                        backgroundColor: 'rgba(16, 185, 129, 0.5)', // Emerald
+                        borderColor: '#10b981',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 10,
+                        grid: { color: '#334155' },
+                        title: { display: true, text: 'Risk Score (1-10)' }
+                    },
+                    y: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    tooltip: commonTooltip,
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // 3. Bar Chart: Latency Comparison
+        const ctxLatency = document.getElementById('latencyChart').getContext('2d');
+        const labelsLatency = wrapLabels(['Texas (US Host)', 'Slovenia (Direct)', 'Slovenia (Bunny CDN)', 'Iceland (Direct)']);
+        
+        new Chart(ctxLatency, {
+            type: 'bar',
+            data: {
+                labels: labelsLatency,
+                datasets: [{
+                    label: 'Time to First Byte (ms)',
+                    data: [25, 145, 35, 160],
+                    backgroundColor: [
+                        'rgba(148, 163, 184, 0.6)', // US
+                        'rgba(239, 68, 68, 0.6)',   // Slow
+                        'rgba(59, 130, 246, 0.8)',  // CDN (Highlight)
+                        'rgba(239, 68, 68, 0.6)'    // Slow
+                    ],
+                    borderColor: [
+                        '#94a3b8',
+                        '#ef4444',
+                        '#3b82f6',
+                        '#ef4444'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#334155' },
+                        title: { display: true, text: 'Milliseconds (ms)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    tooltip: commonTooltip,
+                    legend: { display: false }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
